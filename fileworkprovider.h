@@ -1,18 +1,16 @@
 #ifndef FILEWORKPROVIDER_H
 #define FILEWORKPROVIDER_H
 
-#include <QFile>
-#include <QFileDialog>
 #include <QTextEdit>
-
-class MainWindow;
+#include "cleanfileprovider.h"
 
 class FileWorkProvider
 {
+    CleanFileProvider FilesWork;
 public:
     FileWorkProvider();
-    bool openFile(QString filename, QString openCodec, QTextEdit* window);
-    bool saveFile(QString filename, QString saveCodec, QTextEdit* window);
+    bool openFile(const QString& filename, const QString& openCodec, QTextEdit* window);
+    bool saveFile(const QString& filename, const QString& saveCodec, QTextEdit* window);
 };
 
 #endif // FILEWORKPROVIDER_H

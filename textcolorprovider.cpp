@@ -1,7 +1,4 @@
-#include "mainwindow.h"
 #include "textcolorprovider.h"
-#include "textworkprovider.h"
-#include "fileworkprovider.h"
 
 TextColorProvider::TextColorProvider()
 {

@@ -25,6 +25,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+    cleanfileprovider.cpp \
         main.cpp \
         mainwindow.cpp \
     fileworkprovider.cpp \
@@ -32,6 +33,7 @@ SOURCES += \
     textworkprovider.cpp
 
 HEADERS += \
+    cleanfileprovider.h \
         mainwindow.h \
     fileworkprovider.h \
     textcolorprovider.h \
