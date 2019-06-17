@@ -120,6 +120,12 @@ void MainWindow::on_ActTxColor_triggered() {
     QColor newTx = QColorDialog::getColor(QColor(255,255,255,255),this);
     Graph.setFontColor(ui->Tabs[pos].TEPointer, newTx);
 }
+void MainWindow::on_ActTxColorLocal_triggered() {
+    int pos = ui->tabWidget->currentIndex();
+    if (ui->tabWidget->tabText(pos).isEmpty()) return;
+    QColor newTx = QColorDialog::getColor(QColor(255,255,255,255),this);
+    Graph.setFontColorLocal(ui->Tabs[pos].TEPointer, newTx);
+}
 void MainWindow::on_ActTxBGColor_triggered() {
     int pos = ui->tabWidget->currentIndex();
     if (ui->tabWidget->tabText(pos).isEmpty()) return;

@@ -29,7 +29,7 @@ public:
     QStatusBar *statusBar;
     QTabWidget* tabWidget;
     QVector<TabInfoProvider> Tabs;
-    QAction* actions[34];
+    QAction* actions[35];
     QMenu* menus[6];
 
 
@@ -78,12 +78,15 @@ public:
         actions[20]= new QAction("Фон",menus[2]);
         actions[20]->setObjectName(QString::fromUtf8("ActBGColor"));
         menus[2]->addAction(actions[20]);
-        actions[21]= new QAction("Текст",menus[2]);
-        actions[21]->setObjectName(QString::fromUtf8("ActTxColor"));
-        menus[2]->addAction(actions[21]);
         actions[22]= new QAction("Фон строки",menus[2]);
         actions[22]->setObjectName(QString::fromUtf8("ActTxBGColor"));
         menus[2]->addAction(actions[22]);
+        actions[21]= new QAction("Текст",menus[2]);
+        actions[21]->setObjectName(QString::fromUtf8("ActTxColor"));
+        menus[2]->addAction(actions[21]);
+        actions[34]= new QAction("Выделенный текст",menus[2]);
+        actions[34]->setObjectName(QString::fromUtf8("ActTxColorLocal"));
+        menus[2]->addAction(actions[34]);
         actions[32]= new QAction("Цвет выделения",menus[2]);
         actions[32]->setObjectName(QString::fromUtf8("ActTxABGColor"));
 		menus[2]->addAction(actions[32]);
@@ -377,6 +380,7 @@ public slots:
     void on_ActIncrease_triggered();
     void on_ActDecrease_triggered();
     void on_ActSetFont_triggered();
+    void on_ActTxColorLocal_triggered();
     void on_ActBold_triggered(bool);
     void on_ActItalic_triggered(bool);
     void on_ActUnderline_triggered(bool);

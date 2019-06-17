@@ -59,6 +59,12 @@ bool TextColorProvider::setCursorUnderline(QTextEdit* window, bool flag) {
 }
 
 bool TextColorProvider::setFontColor(QTextEdit* window, QColor color) {
+    QPalette newPalette = window->palette();
+    newPalette.setColor(QPalette::Text,color);
+    window->setPalette(newPalette);
+    return true;
+}
+bool TextColorProvider::setFontColorLocal(QTextEdit* window, QColor color) {
     window->setTextColor(color);
     return true;
 }
@@ -74,7 +80,7 @@ bool TextColorProvider::setFontBGColor(QTextEdit* window, QColor color) {
     return true;
 }
 bool TextColorProvider::setHihlightColor(QTextEdit* window, QColor color) {
-    QPalette newPalette;
+    QPalette newPalette = window->palette();
     newPalette.setColor(QPalette::Highlight,color);
     newPalette.setColor(QPalette::HighlightedText,
                         QColor(255-color.red(),255-color.green(),255-color.blue(),color.alpha())
