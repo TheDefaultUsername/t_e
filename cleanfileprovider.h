@@ -9,6 +9,7 @@ class CleanFileProvider
 {
 public:
     CleanFileProvider();
+
     bool openFile(const QString& filename, QByteArray& input);
     bool saveFile(const QString& filename, const QByteArray& output);
 };

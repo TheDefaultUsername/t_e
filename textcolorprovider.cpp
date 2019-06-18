@@ -68,6 +68,7 @@ bool TextColorProvider::setFontColorLocal(QTextEdit* window, QColor color) {
     window->setTextColor(color);
     return true;
 }
+
 bool TextColorProvider::setBGColor(QTextEdit* window, QColor color) {
     window->setStyleSheet(QString("QTextEdit { background-color: rgb(%1, %2, %3) }")
                                      .arg(QString::number(color.red()))

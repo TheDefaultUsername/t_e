@@ -19,6 +19,7 @@ public:
 
     bool setFontColor(QTextEdit* window, QColor color);
     bool setFontColorLocal(QTextEdit* window, QColor color);
+
     bool setBGColor(QTextEdit* window, QColor color);
     bool setFontBGColor(QTextEdit* window, QColor color);
     bool setHihlightColor(QTextEdit* window, QColor color);

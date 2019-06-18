@@ -1,6 +1,8 @@
 #include "cleanfileprovider.h"
 
-CleanFileProvider::CleanFileProvider() {}
+CleanFileProvider::CleanFileProvider() {
+
+}
 
 bool CleanFileProvider::openFile(const QString &filename, QByteArray& input) {
     bool flag = false;

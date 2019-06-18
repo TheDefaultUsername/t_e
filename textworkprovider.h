@@ -10,6 +10,7 @@ class TextWorkProvider
 {
 public:
     TextWorkProvider();
+
     bool reinterpretCodec(QTextEdit* window, QString codecName, QString previousCodec);
 };
 
