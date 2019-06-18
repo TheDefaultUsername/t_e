@@ -1,7 +1,6 @@
 #include "mainwindow.h"
 #include "textcolorprovider.h"
 #include "textworkprovider.h"
-#include "fileworkprovider.h"
 #include <QWidget>
 #include <QTabWidget>
 #include <QTextEdit>
@@ -53,14 +52,20 @@ void MainWindow::on_Open_triggered() {
     QString fileName = QFileDialog::getOpenFileName(this);
     if (fileName.isEmpty()) {return;}
     if (!openTab(fileName)) {QMessageBox::warning(this,"ERROR","Файл уже открыт"); return;}
-    if(!Files.openFile(fileName,QString("System"),ui->Tabs.last().TEPointer)) {QMessageBox::warning(this,"ERROR","Не удалось открыть файл."); closeTab(ui->Tabs.size()-1); return;}
+    QByteArray input;
+    bool isOk = Files.openFile(fileName, input);
+    if (!isOk) {QMessageBox::warning(this,"ERROR","Не удалось открыть файл."); closeTab(ui->Tabs.size()-1); return;}
+    ui->Tabs.last().TEPointer->append(QTextCodec::codecForName(QString("System").toLatin1())->toUnicode(input));
     ui->Tabs.last().codecName=QString("System");
 }
 void MainWindow::on_OpenFast_triggered() {
     QString fileName = QFileDialog::getOpenFileName(this);
     if (fileName.isEmpty()) {return;}
     if (!openTab(fileName)) {QMessageBox::warning(this,"ERROR","Файл уже открыт"); return;}
-    if(!Files.openFile(fileName,QString(),ui->Tabs.last().TEPointer)) {QMessageBox::warning(this,"ERROR","Не удалось открыть файл."); closeTab(ui->Tabs.size()-1); return;}
+    QByteArray input;
+    bool isOk = Files.openFile(fileName, input);
+    if (!isOk) {QMessageBox::warning(this,"ERROR","Не удалось открыть файл."); closeTab(ui->Tabs.size()-1); return;}
+    ui->Tabs.last().TEPointer->append(input);
     ui->Tabs.last().codecName=QString("UTF-8");
 }
 void MainWindow::on_New_triggered() {
@@ -82,13 +87,15 @@ void MainWindow::on_New_triggered() {
 void MainWindow::on_Save_triggered() {
     int pos = ui->tabWidget->currentIndex();
     if (ui->Tabs[pos].FileName.isEmpty()) {QMessageBox::warning(this,"ERROR","Вкладка не привязана к файлу."); return;}
-    if(!Files.saveFile(ui->Tabs[pos].FileName,ui->Tabs[pos].codecName, ui->Tabs[pos].TEPointer)) {QMessageBox::warning(this,"ERROR","Не удалось сохранить файл.");}
+    bool isOk = Files.saveFile(ui->Tabs[pos].FileName,QTextCodec::codecForName(ui->Tabs[pos].codecName.toLatin1())->fromUnicode(ui->Tabs[pos].TEPointer->toPlainText()));
+    if (!isOk) {QMessageBox::warning(this,"ERROR","Не удалось сохранить файл."); return;}
 }
 void MainWindow::on_SaveAs_triggered() {
     int pos = ui->tabWidget->currentIndex();
     QString fileName = QFileDialog::getSaveFileName(this);
     if (fileName.isEmpty()) {return;}
-    if(!Files.saveFile(fileName,ui->Tabs[pos].codecName, ui->Tabs[pos].TEPointer)) {QMessageBox::warning(this,"ERROR","Не удалось сохранить файл."); return;}
+    bool isOk = Files.saveFile(fileName,QTextCodec::codecForName(ui->Tabs[pos].codecName.toLatin1())->fromUnicode(ui->Tabs[pos].TEPointer->toPlainText()));
+    if (!isOk) {QMessageBox::warning(this,"ERROR","Не удалось сохранить файл."); return;}
     ui->Tabs[pos].FileName=fileName;
     while (fileName.lastIndexOf('/')>=0) {
         fileName.remove(0,1);

@@ -4,7 +4,7 @@
 #include <QMainWindow>
 #include <QtWidgets>
 #include <QVector>
-#include "fileworkprovider.h"
+#include "cleanfileprovider.h"
 #include "textcolorprovider.h"
 #include "textworkprovider.h"
 
@@ -395,7 +395,7 @@ public slots:
 
 public:
     Ui::MainWindow *ui;
-    FileWorkProvider Files;
+    CleanFileProvider Files;
     TextWorkProvider Texts;
     TextColorProvider Graph;
 };

@@ -28,14 +28,12 @@ SOURCES += \
     cleanfileprovider.cpp \
         main.cpp \
         mainwindow.cpp \
-    fileworkprovider.cpp \
     textcolorprovider.cpp \
     textworkprovider.cpp
 
 HEADERS += \
     cleanfileprovider.h \
         mainwindow.h \
-    fileworkprovider.h \
     textcolorprovider.h \
     textworkprovider.h
 

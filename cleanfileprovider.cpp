@@ -2,14 +2,17 @@
 
 CleanFileProvider::CleanFileProvider() {}
 
-QByteArray* CleanFileProvider::openFile(const QString& filename, bool *flag) {
-    *flag = false;
+bool CleanFileProvider::openFile(const QString &filename, QByteArray& input) {
+    bool flag = false;
     QFile file(filename);
-    if (!file.open(QIODevice::ReadOnly)) {return NULL;}
-    *flag = true;
-    QByteArray *result = new QByteArray(file.readAll());
-    file.close();
-    return result;
+    flag = file.open(QIODevice::ReadOnly);
+    if (flag) {
+        input = file.readAll();
+        file.close();
+    } else {
+        input = QByteArray();
+    }
+    return flag;
 }
 
 bool CleanFileProvider::saveFile(const QString &filename, const QByteArray &output) {
