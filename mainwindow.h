@@ -85,9 +85,9 @@ public slots:
 
 public:
     Ui::MainWindow *ui;
-    CleanFileProvider Files;
-    TextWorkProvider Texts;
-    TextColorProvider Graph;
+    CleanFileProvider files;
+    TextWorkProvider texts;
+    TextColorProvider graph;
 };
 
 #endif // MAINWINDOW_H

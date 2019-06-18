@@ -270,7 +270,7 @@ void MainWindow::onOpenTriggered() {
         return;
     }
     QByteArray input;
-    bool isOk = Files.openFile(fileName, input);
+    bool isOk = files.openFile(fileName, input);
     if (!isOk) {
         QMessageBox::warning(this,"ERROR","Не удалось открыть файл.");
         closeTab(ui->tabs.size()-1);
@@ -289,7 +289,7 @@ void MainWindow::onOpenFastTriggered() {
         return;
     }
     QByteArray input;
-    bool isOk = Files.openFile(fileName, input);
+    bool isOk = files.openFile(fileName, input);
     if (!isOk) {
         QMessageBox::warning(this,"ERROR","Не удалось открыть файл.");
         closeTab(ui->tabs.size()-1);
@@ -320,7 +320,7 @@ void MainWindow::onSaveTriggered() {
         QMessageBox::warning(this,"ERROR","Вкладка не привязана к файлу.");
         return;
     }
-    bool isOk = Files.saveFile(ui->tabs[pos].FileName,QTextCodec::codecForName(ui->tabs[pos].codecName.toLatin1())->fromUnicode(ui->tabs[pos].TEPointer->toPlainText()));
+    bool isOk = files.saveFile(ui->tabs[pos].FileName,QTextCodec::codecForName(ui->tabs[pos].codecName.toLatin1())->fromUnicode(ui->tabs[pos].TEPointer->toPlainText()));
     if (!isOk) {
         QMessageBox::warning(this,"ERROR","Не удалось сохранить файл.");
         return;
@@ -332,7 +332,7 @@ void MainWindow::onSaveAsTriggered() {
     if (fileName.isEmpty()) {
         return;
     }
-    bool isOk = Files.saveFile(fileName,QTextCodec::codecForName(ui->tabs[pos].codecName.toLatin1())->fromUnicode(ui->tabs[pos].TEPointer->toPlainText()));
+    bool isOk = files.saveFile(fileName,QTextCodec::codecForName(ui->tabs[pos].codecName.toLatin1())->fromUnicode(ui->tabs[pos].TEPointer->toPlainText()));
     if (!isOk) {
         QMessageBox::warning(this,"ERROR","Не удалось сохранить файл.");
         return;
@@ -353,38 +353,38 @@ void MainWindow::onSetCodecTriggered() {
 }
 void MainWindow::onReadCodecTriggered() {
     int pos = ui->tabWidget->currentIndex();
-    Texts.reinterpretCodec(ui->tabs[pos].TEPointer, reinterpret_cast<QAction*>(sender())->text(),ui->tabs[pos].codecName);
+    texts.reinterpretCodec(ui->tabs[pos].TEPointer, reinterpret_cast<QAction*>(sender())->text(),ui->tabs[pos].codecName);
     ui->tabs[pos].codecName=reinterpret_cast<QAction*>(sender())->text();
 }
 void MainWindow::onActBGColorTriggered() {
     int pos = ui->tabWidget->currentIndex();
     if (ui->tabWidget->tabText(pos).isEmpty()) return;
     QColor newBG = QColorDialog::getColor(QColor(255,255,255,255),this);
-    Graph.setBGColor(ui->tabs[pos].TEPointer, newBG);
+    graph.setBGColor(ui->tabs[pos].TEPointer, newBG);
 }
 void MainWindow::onActTxColorTriggered() {
     int pos = ui->tabWidget->currentIndex();
     if (ui->tabWidget->tabText(pos).isEmpty()) return;
     QColor newTx = QColorDialog::getColor(QColor(255,255,255,255),this);
-    Graph.setFontColor(ui->tabs[pos].TEPointer, newTx);
+    graph.setFontColor(ui->tabs[pos].TEPointer, newTx);
 }
 void MainWindow::onActTxColorLocalTriggered() {
     int pos = ui->tabWidget->currentIndex();
     if (ui->tabWidget->tabText(pos).isEmpty()) return;
     QColor newTx = QColorDialog::getColor(QColor(255,255,255,255),this);
-    Graph.setFontColorLocal(ui->tabs[pos].TEPointer, newTx);
+    graph.setFontColorLocal(ui->tabs[pos].TEPointer, newTx);
 }
 void MainWindow::onActTxBGColorTriggered() {
     int pos = ui->tabWidget->currentIndex();
     if (ui->tabWidget->tabText(pos).isEmpty()) return;
     QColor newTx = QColorDialog::getColor(QColor(255,255,255,255),this);
-    Graph.setFontBGColor(ui->tabs[pos].TEPointer,newTx);
+    graph.setFontBGColor(ui->tabs[pos].TEPointer,newTx);
 }
 void MainWindow::onActTxABGColorTriggered() {
     int pos = ui->tabWidget->currentIndex();
     if (ui->tabWidget->tabText(pos).isEmpty()) return;
     QColor newHighLight = QColorDialog::getColor(QColor(255,255,255,255),this);
-    Graph.setHihlightColor(ui->tabs[pos].TEPointer,newHighLight);
+    graph.setHihlightColor(ui->tabs[pos].TEPointer,newHighLight);
 }
 void MainWindow::onActIncreaseTriggered() {
     int pos = ui->tabWidget->currentIndex();
@@ -416,35 +416,35 @@ void MainWindow::onActSetFontTriggered() {
     bool flag;
     QFont newFont = QFontDialog::getFont(&flag,this);
     if (!flag) return;
-    Graph.setFontCustom(ui->tabs[pos].TEPointer, newFont);
+    graph.setFontCustom(ui->tabs[pos].TEPointer, newFont);
 }
 void MainWindow::onActBoldTriggered(bool flag) {
     int pos = ui->tabWidget->currentIndex();
     if (ui->tabWidget->tabText(pos).isEmpty()) return;
-    Graph.setFontBold(ui->tabs[pos].TEPointer,flag);
+    graph.setFontBold(ui->tabs[pos].TEPointer,flag);
 }
 void MainWindow::onActItalicTriggered(bool flag) {
     int pos = ui->tabWidget->currentIndex();
     if (ui->tabWidget->tabText(pos).isEmpty()) return;
-    Graph.setFontItalic(ui->tabs[pos].TEPointer,flag);
+    graph.setFontItalic(ui->tabs[pos].TEPointer,flag);
 }
 void MainWindow::onActUnderlineTriggered(bool flag) {
     int pos = ui->tabWidget->currentIndex();
     if (ui->tabWidget->tabText(pos).isEmpty()) return;
-    Graph.setFontUnderline(ui->tabs[pos].TEPointer,flag);
+    graph.setFontUnderline(ui->tabs[pos].TEPointer,flag);
 }
 void MainWindow::onActBoldLocalTriggered(bool flag) {
     int pos = ui->tabWidget->currentIndex();
     if (ui->tabWidget->tabText(pos).isEmpty()) return;
-    Graph.setCursorBold(ui->tabs[pos].TEPointer,flag);
+    graph.setCursorBold(ui->tabs[pos].TEPointer,flag);
 }
 void MainWindow::onActItalicLocalTriggered(bool flag) {
     int pos = ui->tabWidget->currentIndex();
     if (ui->tabWidget->tabText(pos).isEmpty()) return;
-    Graph.setCursorItalic(ui->tabs[pos].TEPointer,flag);
+    graph.setCursorItalic(ui->tabs[pos].TEPointer,flag);
 }
 void MainWindow::onActUnderlineLocalTriggered(bool flag) {
     int pos = ui->tabWidget->currentIndex();
     if (ui->tabWidget->tabText(pos).isEmpty()) return;
-    Graph.setCursorUnderline(ui->tabs[pos].TEPointer,flag);
+    graph.setCursorUnderline(ui->tabs[pos].TEPointer,flag);
 }
