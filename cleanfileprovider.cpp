@@ -18,9 +18,12 @@ bool CleanFileProvider::openFile(const QString &filename, QByteArray& input) {
 }
 
 bool CleanFileProvider::saveFile(const QString &filename, const QByteArray &output) {
+    bool flag = false;
     QFile file(filename);
-    if (!file.open(QIODevice::WriteOnly)) {return false;}
-    file.write(output);
-    file.close();
-    return true;
+    flag = file.open(QIODevice::WriteOnly);
+    if (flag) {
+        file.write(output);
+        file.close();
+    }
+    return flag;
 }
