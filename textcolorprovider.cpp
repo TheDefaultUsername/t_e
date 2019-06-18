@@ -13,7 +13,10 @@ bool TextColorProvider::setFontBold(QTextEdit* window, bool flag) {
                 window->font().italic()
                 );
     font.setUnderline(window->font().underline());
-    if (flag) font.setWeight(QFont::Bold); else font.setWeight(QFont::Normal);
+    if (flag)
+        font.setWeight(QFont::Bold);
+    else
+        font.setWeight(QFont::Normal);
     window->setFont(font);
     return true;
 }
